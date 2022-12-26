@@ -23,7 +23,7 @@ Route::get('/', [GuestController::class, 'index'])->name('guest');
 Route::get('about', [GuestController::class, 'about'])->name('about');
 
 // Admin
-Route::resource('product', ProductController::class)->middleware('auth');
+Route::resource('product', ProductController::class);
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 Auth::routes();
 

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -97,7 +101,7 @@ class ProductController extends Controller
         ];
 
         if($request->nama != $product->nama){
-             $request['nama'] = 'required|unique:product';
+             $rules['nama'] = 'required|unique:product';
         }
 
         $data = $request->validate($rules, $message);
