@@ -16,9 +16,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = ProductModel::get();
+        if($request->search != null){
+            $products = ProductModel::where('nama', 'like', "%".$request->search."%")->paginate(8);
+        }else{
+            $products = ProductModel::paginate(8);
+        }
         return view('product', compact('products'));
     }
 
@@ -43,6 +47,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'nama' => 'required|unique:product',
+            'image' => 'required',
             'jumlah' => 'required|numeric',
             'harga' => 'required|numeric'
         ], [
@@ -90,6 +95,7 @@ class ProductController extends Controller
     public function update(Request $request, ProductModel $product)
     {
         $rules = [
+            'image' => 'required',
             'jumlah' => 'required|numeric',
             'harga' => 'required|numeric'
         ];
@@ -121,4 +127,5 @@ class ProductController extends Controller
         ProductModel::destroy($product->id);
         return redirect()->back();
     }
+
 }

@@ -10,6 +10,6 @@ class ProductModel extends Model
     use HasFactory;
 
     protected $table = 'product';
-    protected $fillable = ['nama', 'jumlah', 'harga'];
+    protected $fillable = ['nama', 'jumlah', 'harga', 'image'];
 
 }

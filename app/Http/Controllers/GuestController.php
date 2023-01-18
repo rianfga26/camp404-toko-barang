@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductModel;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -12,15 +13,8 @@ class GuestController extends Controller
      * @return void
      */
     public function index(){
-        return view('index');
+        $products = ProductModel::orderBy('id', 'DESC')->limit(4)->get();
+        return view('index', compact('products'));
     }
 
-    /**
-     * Show the about page 
-     * 
-     * @return void
-     */
-    public function about(){
-        return view('about');
-    }
 }

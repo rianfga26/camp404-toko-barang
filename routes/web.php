@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -20,7 +21,8 @@ use App\Http\Controllers\ProductController;
 
 // Guest 
 Route::get('/', [GuestController::class, 'index'])->name('guest');
-Route::get('about', [GuestController::class, 'about'])->name('about');
+Route::get('/auth/redirect', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('/auth/callback', [LoginController::class, 'googleCallback']);
 
 // Admin
 Route::resource('product', ProductController::class);

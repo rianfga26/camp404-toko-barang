@@ -3,7 +3,7 @@
 @section('content')
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header bg-aero fs-5 text-white fw-bold">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -12,7 +12,7 @@
                         </div>
                     @endif
 
-                    Selamat datang <b>{{ Auth::user()->name }}</b> di administrator toko barang!
+                    Selamat Datang, <b>{{ Auth::user()->name }}</b> pada tampilan administrator toko !
                 </div>
             </div>
         </div>

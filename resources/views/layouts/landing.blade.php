@@ -1,59 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toko Barang</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 </head>
 
-<body>
+<!-- Custom Styles -->
+<style>
+.bg-aero {
+    background: #195D84 !important;
+}
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('guest') }}">Toko Barang</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::currentRouteName() == 'product.index' ? 'active' : ''}} " href="{{ route('product.index') }}">Product</a>
-                        <div class="{{ Route::currentRouteName() == 'product.index' ? 'border-bottom border-dark border-3 mt-n2 w-75 mx-auto' : ''}}"></div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::currentRouteName() == 'about' ? 'active' : ''}}" href="{{ route('about') }}">About</a>
-                        <div class="{{ Route::currentRouteName() == 'about' ? 'border-bottom border-dark border-3 mt-n2 w-75 mx-auto' : ''}}"></div>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    @auth
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ route('home') }}">Dashboard</a>
-                    </li>
-                    @else
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
-                    </li>
-                    @endauth
-                </ul>
+.text-aero {
+    color: #195D84 !important;
+}
+</style>
+
+<body class="bg-white">
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="col-md">
+                <!-- step 1 -->
+                <img src="{{ asset('img/aero-thum.png') }}" alt="" class="img-fluid w-100 h-25">
+                <!-- step 2 -->
+                <div class="d-flex mt-2 bg-light px-2 shadow rounded border">
+                    <div class="d-flex w-50 justify-content-center align-items-center">
+                        <img src="{{ asset('img/aero-logo.png') }}" alt="" class="img-fluid me-4 h-75">
+                        <div class="">
+                            <h4 class="mb-3 fw-bolder">AEROSTREET OFFICIAL STORE</h4>
+                            <img src="{{ asset('img/pengikut.png') }}" alt="" class="img-fluid mb-3">
+                            <a href="{{ route('login') }}" class="btn bg-aero text-white px-4 me-3">Masuk</a>
+                            <a href="{{ route('register') }}" class="btn btn-light border border-1 px-4 text-aero">Daftar</a>
+                        </div>
+                    </div>
+                    <div class="border border-1 mx-5"></div>
+                    <div class="text-center w-50 mt-3">
+                        <h5 class="fw-bold mb-3">Tentang Kami</h5>
+                        <p>Brand sepatu Aerostreet merupakan brand lokal, kini Aerostreet telah menjadi pilihan fashion anak muda di Indonesia. Bahkan kini Aerostreet tak lagi diminati oleh masyarakat Indonesia saja, melainkan juga sudah bisa dirasakan oleh banyak orang yang berada di luar negeri.</p>
+                    </div>
+                </div>
+                <!-- step 3 -->
+                <div class="d-flex justify-content-between align-items-center mt-4 shadow rounded border py-4 container bg-light">
+                    <div class="container ps-5">
+                        <a href="{{ route('guest') }}" class="text-decoration-none text-uppercase {{ Route::currentRouteName() == 'guest' ? 'text-aero' : '' }} text-secondary me-5 fw-bold">Home</a>
+                        <a href="{{ route('product.index') }}" class="text-decoration-none text-uppercase {{ Route::currentRouteName() == 'product.index' ? 'text-aero' : '' }} text-secondary me-5 fw-bold">semua produk</a>
+                    </div>
+                    
+                    <form action="{{ route('product.index') }}" class="w-50">
+                        <div class="form-group d-flex">
+                            <input type="text" class="form-control w-75" placeholder="Temukan produk..." style="background: #D9D9D9" name="search" autocomplete="off">
+                            <button type="submit" class="btn bg-aero text-white ms-1">Cari</button>
+                        </div>
+                    </form>
+                    
+                </div>
+                <!-- step 4 -->
+                @yield('content')
             </div>
         </div>
-    </nav>
-
-    <div class="container">
-        @yield('konten')
     </div>
 </body>
 
