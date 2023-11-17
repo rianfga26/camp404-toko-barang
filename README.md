@@ -1,3 +1,7 @@
-## LINK
-<a href="http://camp404-toko-barang.epizy.com/">http://camp404-toko-barang.epizy.com/</a><br>
-<a href="https://docs.google.com/document/d/1_-25p_iBGBJoBcYCdP7Cj83xF-AOXHZNm_2UpOmw0Dc/edit?usp=sharing">docs</a>
+# Install Project
+
+- download zip or cli command `git clone https://github.com/rianfga26/camp404-toko-barang.git`
+- open folder <i>'camp404-toko-barang'</i> in terminal
+- run `composer install`
+- create new <i>.env </i> and setup database connection
+- run `php artisan migrate` and `php artisan serve`
